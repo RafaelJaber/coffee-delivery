@@ -66,3 +66,21 @@ export const ItemIconSectionLayout = styled.span<ButtonIconsProps>`
   justify-content: center;
   align-items: center;
 `
+
+export const CardSection = styled.section`
+  padding: 2rem 10rem;
+
+  h2 {
+    color: ${(props) => props.theme['gray-800']};
+    font-family: 'baloo 2', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+`
