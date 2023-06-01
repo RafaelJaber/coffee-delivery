@@ -6,19 +6,24 @@ import {
   ButtonPrimaryHeader,
   HeaderLayout,
 } from './styled.ts'
+import { NavLink } from 'react-router-dom'
 
 export function Header() {
   return (
     <HeaderLayout>
-      <img src={logo} alt="" />
+      <NavLink to={'/'}>
+        <img src={logo} alt="" />
+      </NavLink>
       <div>
         <ButtonPrimaryHeader>
           <MapPin size={22} weight="fill" />
           Porto Alegre, RS
         </ButtonPrimaryHeader>
-        <ButtonCardHeader>
-          <ShoppingCart size={22} weight="fill" />
-        </ButtonCardHeader>
+        <NavLink to={'/checkout'}>
+          <ButtonCardHeader>
+            <ShoppingCart size={22} weight="fill" />
+          </ButtonCardHeader>
+        </NavLink>
       </div>
     </HeaderLayout>
   )

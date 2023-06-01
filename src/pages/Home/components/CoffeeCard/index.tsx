@@ -1,4 +1,3 @@
-import coffeeDemo from '../../../../assets/coffees/Americano.svg'
 import { Minus, Plus, ShoppingCart } from '@phosphor-icons/react'
 import {
   CardFooter,
@@ -6,27 +5,29 @@ import {
   InputGroupFooter,
   InputNumberLayout,
 } from './styled.ts'
+import { CoffeeModel } from '../../../../models/CoffeeModel.ts'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  coffee: CoffeeModel
+}
+
+export function CoffeeCard({ coffee }: CoffeeCardProps) {
   return (
     <CardLayout>
-      <img
-        src={coffeeDemo}
-        alt="Imagem com uma xicará cheia de café americano"
-      />
+      <img src={coffee.imageUrl} alt={coffee.description} />
       <a href="#">Tradicional</a>
-      <h3>Expresso Americano</h3>
-      <p>Expresso diluído, menos intenso que o tradicional</p>
+      <h3>{coffee.title}</h3>
+      <p>{coffee.description}</p>
       <CardFooter>
         <p>
-          R$ <strong>9,90</strong>
+          R$ <strong>{coffee.price}</strong>
         </p>
         <InputGroupFooter>
           <InputNumberLayout>
             <button>
               <Minus size={15} />
             </button>
-            <input type="number" min={1} value={15} disabled />
+            <input type="number" min={1} value={0} disabled />
             <button>
               <Plus size={15} />
             </button>
