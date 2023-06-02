@@ -43,9 +43,26 @@ export const ButtonCardHeader = styled.button`
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.1s;
+  position: relative;
 
   &:hover {
     background: ${(props) => props.theme['yellow-500']};
     color: ${(props) => props.theme['gray-200']};
+  }
+
+  & > span {
+    background: ${(props) => props.theme['yellow-700']};
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: ${(props) => props.theme.white};
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -15%;
+    right: -15%;
   }
 `

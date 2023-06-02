@@ -4,4 +4,5 @@ export interface CoffeeModel {
   description: string
   imageUrl: string
   price: number
+  quantity?: number
 }

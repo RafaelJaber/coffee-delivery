@@ -77,11 +77,17 @@ export const CardFooter = styled.footer`
     border-radius: 8px;
     background: ${(props) => props.theme['purple-700']};
     cursor: pointer;
-    transition: background-color 0.1s;
+    transition: background-color 0.1s, opacity 0.1s;
   }
 
   button:hover {
     background: ${(props) => props.theme['purple-500']};
+  }
+
+  button:disabled {
+    background: ${(props) => props.theme['purple-700']};
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 `
 
