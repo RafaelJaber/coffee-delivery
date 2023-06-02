@@ -7,11 +7,19 @@ import {
   HeaderLayout,
 } from './styled.ts'
 import { NavLink } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CardContext } from '../../contexts/CardContext.tsx'
 
 export function Header() {
   const { cart } = useContext(CardContext)
+  const [cartItensQuantity, setCartItensQuantity] = useState(0)
+
+  useEffect(() => {
+    const itens = cart.coffees.reduce((quantity, item) => {
+      return quantity + item.quantity!
+    }, 0)
+    setCartItensQuantity(itens)
+  }, [cartItensQuantity, cart])
 
   return (
     <HeaderLayout>
@@ -26,7 +34,7 @@ export function Header() {
         <NavLink to={'/checkout'}>
           <ButtonCardHeader>
             <ShoppingCart size={22} weight="fill" />
-            <span>{cart.coffees.length}</span>
+            {cartItensQuantity !== 0 ? <span>{cartItensQuantity}</span> : ''}
           </ButtonCardHeader>
         </NavLink>
       </div>

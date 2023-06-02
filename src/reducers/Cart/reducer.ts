@@ -28,16 +28,22 @@ export function cartReducer(state: CartModel, action: any) {
         return state
       }
 
-      const coffeeAlter = state.coffees[coffeeIndex]
-      if (
-        coffeeAlter.quantity! > 0 &&
-        coffeeAlter.quantity! >= action.payload.item.quantity
-      ) {
-        return produce(state, (draft) => {
-          draft.coffees[coffeeIndex].quantity = action.payload.item.quantity
-        })
+      return produce(state, (draft) => {
+        draft.coffees.splice(coffeeIndex, 1)
+      })
+    }
+    case CartActionEnum.CHANGE_ITEM_QUANTITY: {
+      const coffeeIndex = state.coffees.findIndex((coffee) => {
+        return coffee.id === action.payload.item.id
+      })
+
+      if (coffeeIndex < 0) {
+        return state
       }
-      return state
+
+      return produce(state, (draft) => {
+        draft.coffees[coffeeIndex].quantity = action.payload.quantity
+      })
     }
 
     default:

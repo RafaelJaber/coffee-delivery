@@ -1,25 +1,46 @@
-import { DivTextLayout, LayoutCheckoutSelect } from './styles.ts'
+import { useContext, useEffect, useState } from 'react'
+import { CardContext } from '../../../../contexts/CardContext.tsx'
 import { CoffeeCheckoutItem } from './components/CoffeeCheckoutItem'
 
+import { DivTextLayout, LayoutCheckoutSelect } from './styles.ts'
+
 export function CheckoutSelect() {
+  const { cart } = useContext(CardContext)
+  const [totalItens, setTotalItens] = useState(0)
+
+  const tax: number = 3.75
+
+  useEffect(() => {
+    const total = cart.coffees.reduce((totalOfItens: number, item) => {
+      return totalOfItens + item.price * item.quantity!
+    }, 0)
+    setTotalItens(total)
+  }, [cart, totalItens])
+
   return (
     <>
       <LayoutCheckoutSelect>
-        <CoffeeCheckoutItem />
-        <CoffeeCheckoutItem />
+        {cart.coffees.map((coffee) => {
+          return (
+            <CoffeeCheckoutItem
+              key={coffee.id || 'item_removido'}
+              coffee={coffee}
+            />
+          )
+        })}
 
         <DivTextLayout>
           <span>
             <p>Total de itens</p>
-            R$ 29,70
+            R$ {totalItens.toFixed(2)}
           </span>
           <span>
             <p>Entrega</p>
-            R$ 3,70
+            R$ {tax}
           </span>
           <span className="total">
             <p>Total</p>
-            R$ 33,70
+            R$ {(totalItens + tax).toFixed(2)}
           </span>
         </DivTextLayout>
 

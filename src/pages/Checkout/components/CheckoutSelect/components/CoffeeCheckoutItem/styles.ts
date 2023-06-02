@@ -78,6 +78,10 @@ export const InputNumberLayout = styled.div`
     background: none;
   }
 
+  button:disabled {
+    cursor: not-allowed;
+  }
+
   button:active,
   button:focus {
     box-shadow: none;

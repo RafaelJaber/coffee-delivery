@@ -5,6 +5,7 @@ export enum CartActionEnum {
   REMOVE_ITEM = 'REMOVE_ITEM',
   CHECKOUT = 'CHECKOUT',
   CLEAR = 'CLEAR',
+  CHANGE_ITEM_QUANTITY = 'CHANGE_ITEM_QUANTITY',
 }
 
 export function addItemCartAction(item: CoffeeModel) {
@@ -21,6 +22,19 @@ export function removeItemCartAction(item: CoffeeModel) {
     type: CartActionEnum.REMOVE_ITEM,
     payload: {
       item,
+    },
+  }
+}
+
+export function changeItemCartQuantityAction(
+  item: CoffeeModel,
+  quantity: number,
+) {
+  return {
+    type: CartActionEnum.CHANGE_ITEM_QUANTITY,
+    payload: {
+      item,
+      quantity,
     },
   }
 }
