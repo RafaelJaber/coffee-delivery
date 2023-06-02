@@ -45,6 +45,16 @@ export function cartReducer(state: CartModel, action: any) {
         draft.coffees[coffeeIndex].quantity = action.payload.quantity
       })
     }
+    case CartActionEnum.CHECKOUT: {
+      return produce(state, (draft) => {
+        draft.userData = action.payload.item
+      })
+    }
+    case CartActionEnum.CLEAR: {
+      return produce(state, (draft) => {
+        draft.coffees = []
+      })
+    }
 
     default:
       return state

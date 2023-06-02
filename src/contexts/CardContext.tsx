@@ -1,18 +1,23 @@
-import { createContext, ReactNode, useEffect, useReducer } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 import { CoffeeModel } from '../models/CoffeeModel.ts'
 import { cartReducer } from '../reducers/Cart/reducer.ts'
 import { CartModel } from '../models/CartModel.ts'
 import {
+  addAddressToCartAction,
   addItemCartAction,
   changeItemCartQuantityAction,
+  clearCartAction,
   removeItemCartAction,
 } from '../reducers/Cart/action.ts'
+import { UserAddress } from '../models/UserAddress.ts'
 
 interface CardContextType {
   cart: CartModel
   addItemToCard: (coffee: CoffeeModel, quantity: number) => void
   removeItemCart: (coffee: CoffeeModel) => void
   changeItemCartQuantity: (coffee: CoffeeModel, quantity: number) => void
+  addAddressToCart: (item: UserAddress) => void
+  clearCart: () => void
 }
 
 interface CardContextProviderProps {
@@ -26,10 +31,6 @@ export function CardContextProvider({ children }: CardContextProviderProps) {
     coffees: [],
     userData: null,
   })
-
-  useEffect(() => {
-    console.log(cartState)
-  }, [cartState])
 
   function addItemToCard(item: CoffeeModel, quantity: number) {
     const itemToAdd = { ...item }
@@ -45,6 +46,14 @@ export function CardContextProvider({ children }: CardContextProviderProps) {
     dispatch(changeItemCartQuantityAction(item, quantity))
   }
 
+  function addAddressToCart(item: UserAddress) {
+    dispatch(addAddressToCartAction(item))
+  }
+
+  function clearCart() {
+    dispatch(clearCartAction())
+  }
+
   return (
     <>
       <CardContext.Provider
@@ -53,6 +62,8 @@ export function CardContextProvider({ children }: CardContextProviderProps) {
           addItemToCard,
           removeItemCart,
           changeItemCartQuantity,
+          addAddressToCart,
+          clearCart,
         }}
       >
         {children}

@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 import { CardContext } from '../../../../contexts/CardContext.tsx'
 import { CoffeeCheckoutItem } from './components/CoffeeCheckoutItem'
+import { useFormContext } from 'react-hook-form'
 
 import { DivTextLayout, LayoutCheckoutSelect } from './styles.ts'
 
 export function CheckoutSelect() {
   const { cart } = useContext(CardContext)
   const [totalItens, setTotalItens] = useState(0)
+  const { formState } = useFormContext()
 
   const tax: number = 3.75
 
@@ -44,7 +46,9 @@ export function CheckoutSelect() {
           </span>
         </DivTextLayout>
 
-        <button>Confirmar pedido</button>
+        <button type="submit" disabled={!formState.isValid}>
+          Confirmar pedido
+        </button>
       </LayoutCheckoutSelect>
     </>
   )

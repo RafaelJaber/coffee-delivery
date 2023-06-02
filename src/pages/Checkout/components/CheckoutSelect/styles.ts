@@ -19,6 +19,11 @@ export const LayoutCheckoutSelect = styled.div`
     transition: background-color 0.1s;
   }
 
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
   & > button:hover {
     background: ${(props) => props.theme['yellow-700']};
   }

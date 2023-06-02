@@ -4,6 +4,7 @@ export interface UserAddress {
   number: string
   complement: string
   neighborhood: string
+  city: string
   uf: string
   paymentMethod: string
 }

@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
-import { SuccessLayout } from './styles.ts'
+import { CardContext } from '../../contexts/CardContext.tsx'
 
+import { SuccessLayout } from './styles.ts'
 import image from '../../assets/Illustration.svg'
 
 export function Success() {
+  const { cart } = useContext(CardContext)
+  const { userData } = cart
   return (
     <SuccessLayout>
       <div>
@@ -16,8 +20,14 @@ export function Success() {
               <MapPin size={16} />
             </span>
             <p>
-              Entrega em <strong>Endereço digitado aqui</strong>
-              <small>Restante do endereço</small>
+              Entrega em{' '}
+              <strong>
+                {userData?.street}, {userData?.number}
+              </strong>{' '}
+              <br />
+              <small>
+                {userData?.neighborhood} = {userData?.city}, {userData?.uf}
+              </small>
             </p>
           </span>
 
@@ -36,8 +46,8 @@ export function Success() {
               <CurrencyDollar size={16} />
             </span>
             <p>
-              Pagamento na entrega
-              <strong>Pagamento escolhido</strong>
+              Pagamento na entrega <br />
+              <strong>{userData?.paymentMethod}</strong>
             </p>
           </span>
         </div>

@@ -1,4 +1,5 @@
 import { CoffeeModel } from '../../models/CoffeeModel.ts'
+import { UserAddress } from '../../models/UserAddress.ts'
 
 export enum CartActionEnum {
   ADD_ITEM = 'ADD_ITEM',
@@ -36,5 +37,21 @@ export function changeItemCartQuantityAction(
       item,
       quantity,
     },
+  }
+}
+
+export function addAddressToCartAction(item: UserAddress) {
+  return {
+    type: CartActionEnum.CHECKOUT,
+    payload: {
+      item,
+    },
+  }
+}
+
+export function clearCartAction() {
+  return {
+    type: CartActionEnum.CLEAR,
+    payload: {},
   }
 }
